@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Testing</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<h1 style="text-align: center;">Open Bank Project Sandbox</h1>
+
+		<div id="login" class="section">
+			<h3>Customer Login</h3>
+			<label>User Name</label><input type="text" id="userName" placeholder="User Name" value="susan.uk.29@example.com" />
+			<label>Password</label> <input type="text" id="password" placeholder="Password" value="2b78e8" /> <label>Consumer Key</label>
+			<input type="text" id="key" placeholder="API Key" value="behki3vwp51l4hvd0kbuqbbogm4myywnlzo3lrqz" />
+			<button
+				onClick="userlogin(document.getElementById('userName').value,document.getElementById('password').value,document.getElementById('key').value)"
+			>
+				Login
+			</button>
+			<br />
+			<div>
+				<p id="currentUser">Current User:</p>
+			</div>
+		</div>
+		<div class="contain">
+			<div id="userInfo" class="flexSection">
+				<h3>Customer Information</h3>
+				<div class="gridContain">
+					<label class="col1">Bank</label>
+					<select name="bank" id="userBank" class="col2">
+						<option value="at.03.2080.uk">Abanca (at.03.2080.uk)</option>
+						<option value="at02-2080--01">Abanca (at02-2080--01)</option>
+						<option value="at03-2080">Abanca (at03-2080)</option>
+						<option value="at.03.0182.es">BBVA (at.03.0182.es)</option>
+						<option value="at02-0182--01">BBVA (at02-0182--01)</option>
+						<option value="at03-0182">BBVA (at03-0182)</option>
+						<option value="at.03.0487.es">BMN (at.03.0487.es)</option>
+						<option value="at02-0487--01">BMN (at02-0487--01)</option>
+						<option value="at03-0487">BMN (at03-0487)</option>
+						<option value="Bank-of-Pune">BOP (Bank-of-Pune)</option>
+						<option value="at.03.0061.es">Banca March (at.03.0061.es)</option>
+						<option value="at02-0061--01">Banca March (at02-0061--01)</option>
+						<option value="at03-0061">Banca March (at03-0061)</option>
+						<option value="at.03.0238.es">Banco Pastor (at.03.0238.es)</option>
+						<option value="at02-0238--01">Banco Pastor (at02-0238--01)</option>
+						<option value="at03-0238">Banco Pastor (at03-0238)</option>
+						<option value="at.03.0075.es">Banco Popular (at.03.0075.es)</option>
+						<option value="at02-0075--01">Banco Popular (at02-0075--01)</option>
+						<option value="at03-0075">Banco Popular (at03-0075)</option>
+						<option value="at.03.0049.es">Banco Santander (at.03.0049.es)</option>
+						<option value="at02-0049--01">Banco Santander (at02-0049--01)</option>
+						<option value="at03-0049">Banco Santander (at03-0049)</option>
+						<option value="Bank 85SP7Q">Bank New (Bank 85SP7Q)</option>
+						<option value="at.03.bank-x.uk">Bank X (at.03.bank-x.uk)</option>
+						<option value="at02-bank-x--01">Bank X (at02-bank-x--01)</option>
+						<option value="at03-bank-x">Bank X (at03-bank-x)</option>
+						<option value="obp-bank-x-g">Bank X (obp-bank-x-g)</option>
+						<option value="obp-bank-x-r">Bank X (obp-bank-x-r)</option>
+						<option value="obp-bankx-m">Bank X (obp-bankx-m)</option>
+						<option value="obp-bankx-n">Bank X (obp-bankx-n)</option>
+						<option value="obp-bankx-q">Bank X (obp-bankx-q)</option>
+						<option value="at.03.bank-y.uk">Bank Y (at.03.bank-y.uk)</option>
+						<option value="at02-bank-y--01">Bank Y (at02-bank-y--01)</option>
+						<option value="at03-bank-y">Bank Y (at03-bank-y)</option>
+						<option value="obp-bank-y-g">Bank Y (obp-bank-y-g)</option>
+						<option value="obp-bank-y-r">Bank Y (obp-bank-y-r)</option>
+						<option value="obp-banky-m">Bank Y (obp-banky-m)</option>
+						<option value="obp-banky-n">Bank Y (obp-banky-n)</option>
+						<option value="obp-banky-q">Bank Y (obp-banky-q)</option>
+						<option value="bb.01.de">Bank of Berlin (bb.01.de)</option>
+						<option value="at.03.2038.es">Bankia (at.03.2038.es)</option>
+						<option value="at02-2038--01">Bankia (at02-2038--01)</option>
+						<option value="at03-2038">Bankia (at03-2038)</option>
+						<option value="at.03.0128.es">Bankinter (at.03.0128.es)</option>
+						<option value="at02-0128--01">Bankinter (at02-0128--01)</option>
+						<option value="at03-0128">Bankinter (at03-0128)</option>
+						<option value="at.03.2100.es">CaixaBank (at.03.2100.es)</option>
+						<option value="at02-2100--01">CaixaBank (at02-2100--01)</option>
+						<option value="at03-2100">CaixaBank (at03-2100)</option>
+						<option value="at.03.0225.es">Cetelem (at.03.0225.es)</option>
+						<option value="at02-0225--01">Cetelem (at02-0225--01)</option>
+						<option value="at03-0225">Cetelem (at03-0225)</option>
+						<option value="deutche-test">Deutche Bank Test (deutche-test)</option>
+						<option value="at.03.0019.es">Deutsche Bank (at.03.0019.es)</option>
+						<option value="at02-0019--01">Deutsche Bank (at02-0019--01)</option>
+						<option value="at03-0019">Deutsche Bank (at03-0019)</option>
+						<option value="erste-test">Erste Bank Test (erste-test)</option>
+						<option value="gh.29.fr">FR (gh.29.fr)</option>
+						<option value="op.01.fr">FR (op.01.fr)</option>
+						<option value="op.02.fr">FR (op.02.fr)</option>
+						<option value="hsbc-test">HSBC Test (hsbc-test)</option>
+						<option value="ibb">IBB (ibb)</option>
+						<option value="at.03.1465.es">ING (at.03.1465.es)</option>
+						<option value="at02-1465--01">ING (at02-1465--01)</option>
+						<option value="at03-1465">ING (at03-1465)</option>
+						<option value="at.03.2085.es">Ibercaja (at.03.2085.es)</option>
+						<option value="at02-2085--01">Ibercaja (at02-2085--01)</option>
+						<option value="at03-2085">Ibercaja (at03-2085)</option>
+						<option value="importbank0">Import Bank 0 (importbank0)</option>
+						<option value="importbank1">Import Bank 1 (importbank1)</option>
+						<option value="1001">In (1001)</option>
+						<option value="in-bank-x-1">India Bank X (in-bank-x-1)</option>
+						<option value="in-bank-x-2">India Bank X (in-bank-x-2)</option>
+						<option value="in-bank-y-1">India Bank Y (in-bank-y-1)</option>
+						<option value="in-bank-y-2">India Bank Y (in-bank-y-2)</option>
+						<option value="at.03.2095.es">Kutxabank (at.03.2095.es)</option>
+						<option value="at02-2095--01">Kutxabank (at02-2095--01)</option>
+						<option value="at03-2095">Kutxabank (at03-2095)</option>
+						<option value="gh.42.fr.lbp">LA BANQUE POSTALE (gh.42.fr.lbp)</option>
+						<option value="at.03.2048.es">Liberbank (at.03.2048.es)</option>
+						<option value="at02-2048--01">Liberbank (at02-2048--01)</option>
+						<option value="at03-2048">Liberbank (at03-2048)</option>
+						<option value="nordea">Nordea (nordea)</option>
+						<option value="nordeaab">Nordea (nordeaab)</option>
+						<option value="at.03.0073.es">Open Bank (at.03.0073.es)</option>
+						<option value="at02-0073--01">Open Bank (at02-0073--01)</option>
+						<option value="at03-0073">Open Bank (at03-0073)</option>
+						<option value="Bank of Pune">Pune (Bank of Pune)</option>
+						<option value="at.03.0081.es">Sabadell (at.03.0081.es)</option>
+						<option value="at02-0081--01">Sabadell (at02-0081--01)</option>
+						<option value="at03-0081">Sabadell (at03-0081)</option>
+						<option value="test-bank">TB (test-bank)</option>
+						<option value="testowy_bank_id">TB (testowy_bank_id)</option>
+						<option value="rbs">The Royal Bank of Scotland (rbs)</option>
+						<option value="gh.29.tr">Tr (gh.29.tr)</option>
+						<option value="op.01.tr">Tr (op.01.tr)</option>
+						<option value="op.02.tr">Tr (op.02.tr)</option>
+						<option value="gh.29.us">US (gh.29.us)</option>
+						<option value="op.01.us">US (op.01.us)</option>
+						<option value="op.02.us">US (op.02.us)</option>
+						<option value="at.03.2103.es">Unicaja (at.03.2103.es)</option>
+						<option value="at02-2103--01">Unicaja (at02-2103--01)</option>
+						<option value="at03-2103">Unicaja (at03-2103)</option>
+						<option value="au.01.aum.aum">aum (au.01.aum.aum)</option>
+						<option value="au.01.aus.aus">aus (au.01.aus.aus)</option>
+						<option value="gh.29.be">be (gh.29.be)</option>
+						<option value="op.01.be">be (op.01.be)</option>
+						<option value="op.02.be">be (op.02.be)</option>
+						<option value="chase">cb (chase)</option>
+						<option value="gh.29.de">de (gh.29.de)</option>
+						<option value="op.01.de">de (op.01.de)</option>
+						<option value="op.02.de">de (op.02.de)</option>
+						<option value="fcb">fcb (fcb)</option>
+						<option value="gh.29.fi">fi (gh.29.fi)</option>
+						<option value="op.01.fi">fi (op.01.fi)</option>
+						<option value="op.02.fi">fi (op.02.fi)</option>
+						<option value="1006">gh (1006)</option>
+						<option value="1005">ind (1005)</option>
+						<option value="inv.01.us.inv">inv (inv.01.us.inv)</option>
+						<option value="gh.29.it">it (gh.29.it)</option>
+						<option value="op.01.it">it (op.01.it)</option>
+						<option value="op.02.it">it (op.02.it)</option>
+						<option value="IVRSolution">ivr (IVRSolution)</option>
+						<option value="1003">rbi (1003)</option>
+						<option value="rxw">rxw (rxw)</option>
+						<option value="1002">sbi (1002)</option>
+						<option value="au.01.uk.uk">uk (au.01.uk.uk)</option>
+						<option value="gh.29.uk">uk (gh.29.uk)</option>
+						<option value="gh.29.uk.x">uk (gh.29.uk.x)</option>
+						<option value="gh.42.uk.uk">uk (gh.42.uk.uk)</option>
+						<option value="inv.01.uk.uk">uk (inv.01.uk.uk)</option>
+						<option value="op.01.uk">uk (op.01.uk)</option>
+						<option value="op.02.uk">uk (op.02.uk)</option>
+						<option value="somo.55.uk.uk">uk (somo.55.uk.uk)</option>
+					</select>
+					<br />
+					<label class="col1">Account</label><input type="text" id="userAccount" placeholder="Account ID" class="col2" />
+					<br />
+					<label class="col1">Currency</label><input type="text" id="Currency" placeholder="EUR" class="col2" />
+					<br />
+				</div>
+				<button onclick="testing(document.getElementById('userBank').value)">show bank</button>
+			</div>
+			<div id="counterInfo" class="flexSection">
+				<h3>Counter Party Information</h3>
+				<div class="gridContain">
+					<label class="col1">Bank</label>
+					<select name="bank" id="counterBank" class="col2">
+						<option value="at.03.2080.uk">Abanca (at.03.2080.uk)</option>
+						<option value="at02-2080--01">Abanca (at02-2080--01)</option>
+						<option value="at03-2080">Abanca (at03-2080)</option>
+						<option value="at.03.0182.es">BBVA (at.03.0182.es)</option>
+						<option value="at02-0182--01">BBVA (at02-0182--01)</option>
+						<option value="at03-0182">BBVA (at03-0182)</option>
+						<option value="at.03.0487.es">BMN (at.03.0487.es)</option>
+						<option value="at02-0487--01">BMN (at02-0487--01)</option>
+						<option value="at03-0487">BMN (at03-0487)</option>
+						<option value="Bank-of-Pune">BOP (Bank-of-Pune)</option>
+						<option value="at.03.0061.es">Banca March (at.03.0061.es)</option>
+						<option value="at02-0061--01">Banca March (at02-0061--01)</option>
+						<option value="at03-0061">Banca March (at03-0061)</option>
+						<option value="at.03.0238.es">Banco Pastor (at.03.0238.es)</option>
+						<option value="at02-0238--01">Banco Pastor (at02-0238--01)</option>
+						<option value="at03-0238">Banco Pastor (at03-0238)</option>
+						<option value="at.03.0075.es">Banco Popular (at.03.0075.es)</option>
+						<option value="at02-0075--01">Banco Popular (at02-0075--01)</option>
+						<option value="at03-0075">Banco Popular (at03-0075)</option>
+						<option value="at.03.0049.es">Banco Santander (at.03.0049.es)</option>
+						<option value="at02-0049--01">Banco Santander (at02-0049--01)</option>
+						<option value="at03-0049">Banco Santander (at03-0049)</option>
+						<option value="Bank 85SP7Q">Bank New (Bank 85SP7Q)</option>
+						<option value="at.03.bank-x.uk">Bank X (at.03.bank-x.uk)</option>
+						<option value="at02-bank-x--01">Bank X (at02-bank-x--01)</option>
+						<option value="at03-bank-x">Bank X (at03-bank-x)</option>
+						<option value="obp-bank-x-g">Bank X (obp-bank-x-g)</option>
+						<option value="obp-bank-x-r">Bank X (obp-bank-x-r)</option>
+						<option value="obp-bankx-m">Bank X (obp-bankx-m)</option>
+						<option value="obp-bankx-n">Bank X (obp-bankx-n)</option>
+						<option value="obp-bankx-q">Bank X (obp-bankx-q)</option>
+						<option value="at.03.bank-y.uk">Bank Y (at.03.bank-y.uk)</option>
+						<option value="at02-bank-y--01">Bank Y (at02-bank-y--01)</option>
+						<option value="at03-bank-y">Bank Y (at03-bank-y)</option>
+						<option value="obp-bank-y-g">Bank Y (obp-bank-y-g)</option>
+						<option value="obp-bank-y-r">Bank Y (obp-bank-y-r)</option>
+						<option value="obp-banky-m">Bank Y (obp-banky-m)</option>
+						<option value="obp-banky-n">Bank Y (obp-banky-n)</option>
+						<option value="obp-banky-q">Bank Y (obp-banky-q)</option>
+						<option value="bb.01.de">Bank of Berlin (bb.01.de)</option>
+						<option value="at.03.2038.es">Bankia (at.03.2038.es)</option>
+						<option value="at02-2038--01">Bankia (at02-2038--01)</option>
+						<option value="at03-2038">Bankia (at03-2038)</option>
+						<option value="at.03.0128.es">Bankinter (at.03.0128.es)</option>
+						<option value="at02-0128--01">Bankinter (at02-0128--01)</option>
+						<option value="at03-0128">Bankinter (at03-0128)</option>
+						<option value="at.03.2100.es">CaixaBank (at.03.2100.es)</option>
+						<option value="at02-2100--01">CaixaBank (at02-2100--01)</option>
+						<option value="at03-2100">CaixaBank (at03-2100)</option>
+						<option value="at.03.0225.es">Cetelem (at.03.0225.es)</option>
+						<option value="at02-0225--01">Cetelem (at02-0225--01)</option>
+						<option value="at03-0225">Cetelem (at03-0225)</option>
+						<option value="deutche-test">Deutche Bank Test (deutche-test)</option>
+						<option value="at.03.0019.es">Deutsche Bank (at.03.0019.es)</option>
+						<option value="at02-0019--01">Deutsche Bank (at02-0019--01)</option>
+						<option value="at03-0019">Deutsche Bank (at03-0019)</option>
+						<option value="erste-test">Erste Bank Test (erste-test)</option>
+						<option value="gh.29.fr">FR (gh.29.fr)</option>
+						<option value="op.01.fr">FR (op.01.fr)</option>
+						<option value="op.02.fr">FR (op.02.fr)</option>
+						<option value="hsbc-test">HSBC Test (hsbc-test)</option>
+						<option value="ibb">IBB (ibb)</option>
+						<option value="at.03.1465.es">ING (at.03.1465.es)</option>
+						<option value="at02-1465--01">ING (at02-1465--01)</option>
+						<option value="at03-1465">ING (at03-1465)</option>
+						<option value="at.03.2085.es">Ibercaja (at.03.2085.es)</option>
+						<option value="at02-2085--01">Ibercaja (at02-2085--01)</option>
+						<option value="at03-2085">Ibercaja (at03-2085)</option>
+						<option value="importbank0">Import Bank 0 (importbank0)</option>
+						<option value="importbank1">Import Bank 1 (importbank1)</option>
+						<option value="1001">In (1001)</option>
+						<option value="in-bank-x-1">India Bank X (in-bank-x-1)</option>
+						<option value="in-bank-x-2">India Bank X (in-bank-x-2)</option>
+						<option value="in-bank-y-1">India Bank Y (in-bank-y-1)</option>
+						<option value="in-bank-y-2">India Bank Y (in-bank-y-2)</option>
+						<option value="at.03.2095.es">Kutxabank (at.03.2095.es)</option>
+						<option value="at02-2095--01">Kutxabank (at02-2095--01)</option>
+						<option value="at03-2095">Kutxabank (at03-2095)</option>
+						<option value="gh.42.fr.lbp">LA BANQUE POSTALE (gh.42.fr.lbp)</option>
+						<option value="at.03.2048.es">Liberbank (at.03.2048.es)</option>
+						<option value="at02-2048--01">Liberbank (at02-2048--01)</option>
+						<option value="at03-2048">Liberbank (at03-2048)</option>
+						<option value="nordea">Nordea (nordea)</option>
+						<option value="nordeaab">Nordea (nordeaab)</option>
+						<option value="at.03.0073.es">Open Bank (at.03.0073.es)</option>
+						<option value="at02-0073--01">Open Bank (at02-0073--01)</option>
+						<option value="at03-0073">Open Bank (at03-0073)</option>
+						<option value="Bank of Pune">Pune (Bank of Pune)</option>
+						<option value="at.03.0081.es">Sabadell (at.03.0081.es)</option>
+						<option value="at02-0081--01">Sabadell (at02-0081--01)</option>
+						<option value="at03-0081">Sabadell (at03-0081)</option>
+						<option value="test-bank">TB (test-bank)</option>
+						<option value="testowy_bank_id">TB (testowy_bank_id)</option>
+						<option value="rbs">The Royal Bank of Scotland (rbs)</option>
+						<option value="gh.29.tr">Tr (gh.29.tr)</option>
+						<option value="op.01.tr">Tr (op.01.tr)</option>
+						<option value="op.02.tr">Tr (op.02.tr)</option>
+						<option value="gh.29.us">US (gh.29.us)</option>
+						<option value="op.01.us">US (op.01.us)</option>
+						<option value="op.02.us">US (op.02.us)</option>
+						<option value="at.03.2103.es">Unicaja (at.03.2103.es)</option>
+						<option value="at02-2103--01">Unicaja (at02-2103--01)</option>
+						<option value="at03-2103">Unicaja (at03-2103)</option>
+						<option value="au.01.aum.aum">aum (au.01.aum.aum)</option>
+						<option value="au.01.aus.aus">aus (au.01.aus.aus)</option>
+						<option value="gh.29.be">be (gh.29.be)</option>
+						<option value="op.01.be">be (op.01.be)</option>
+						<option value="op.02.be">be (op.02.be)</option>
+						<option value="chase">cb (chase)</option>
+						<option value="gh.29.de">de (gh.29.de)</option>
+						<option value="op.01.de">de (op.01.de)</option>
+						<option value="op.02.de">de (op.02.de)</option>
+						<option value="fcb">fcb (fcb)</option>
+						<option value="gh.29.fi">fi (gh.29.fi)</option>
+						<option value="op.01.fi">fi (op.01.fi)</option>
+						<option value="op.02.fi">fi (op.02.fi)</option>
+						<option value="1006">gh (1006)</option>
+						<option value="1005">ind (1005)</option>
+						<option value="inv.01.us.inv">inv (inv.01.us.inv)</option>
+						<option value="gh.29.it">it (gh.29.it)</option>
+						<option value="op.01.it">it (op.01.it)</option>
+						<option value="op.02.it">it (op.02.it)</option>
+						<option value="IVRSolution">ivr (IVRSolution)</option>
+						<option value="1003">rbi (1003)</option>
+						<option value="rxw">rxw (rxw)</option>
+						<option value="1002">sbi (1002)</option>
+						<option value="au.01.uk.uk">uk (au.01.uk.uk)</option>
+						<option value="gh.29.uk">uk (gh.29.uk)</option>
+						<option value="gh.29.uk.x">uk (gh.29.uk.x)</option>
+						<option value="gh.42.uk.uk">uk (gh.42.uk.uk)</option>
+						<option value="inv.01.uk.uk">uk (inv.01.uk.uk)</option>
+						<option value="op.01.uk">uk (op.01.uk)</option>
+						<option value="op.02.uk">uk (op.02.uk)</option>
+						<option value="somo.55.uk.uk">uk (somo.55.uk.uk)</option>
+					</select>
+					<br />
+					<label class="col1">Account</label><input type="text" id="userAccount" placeholder="Account ID" class="col2" />
+					<br /><label class="col1">Transfer Amount</label><input type="number" placeholder="100.00" class="col2" />
+				</div>
+			</div>
+			<div class="flexSection">
+				<h3>Finding ATM</h3>
+				<label class="col1">Bank</label>
+				<select name="bank" id="atmBank" class="col2">
+					<option value="at.03.2080.uk">Abanca (at.03.2080.uk)</option>
+					<option value="at02-2080--01">Abanca (at02-2080--01)</option>
+					<option value="at03-2080">Abanca (at03-2080)</option>
+					<option value="at.03.0182.es">BBVA (at.03.0182.es)</option>
+					<option value="at02-0182--01">BBVA (at02-0182--01)</option>
+					<option value="at03-0182">BBVA (at03-0182)</option>
+					<option value="at.03.0487.es">BMN (at.03.0487.es)</option>
+					<option value="at02-0487--01">BMN (at02-0487--01)</option>
+					<option value="at03-0487">BMN (at03-0487)</option>
+					<option value="Bank-of-Pune">BOP (Bank-of-Pune)</option>
+					<option value="at.03.0061.es">Banca March (at.03.0061.es)</option>
+					<option value="at02-0061--01">Banca March (at02-0061--01)</option>
+					<option value="at03-0061">Banca March (at03-0061)</option>
+					<option value="at.03.0238.es">Banco Pastor (at.03.0238.es)</option>
+					<option value="at02-0238--01">Banco Pastor (at02-0238--01)</option>
+					<option value="at03-0238">Banco Pastor (at03-0238)</option>
+					<option value="at.03.0075.es">Banco Popular (at.03.0075.es)</option>
+					<option value="at02-0075--01">Banco Popular (at02-0075--01)</option>
+					<option value="at03-0075">Banco Popular (at03-0075)</option>
+					<option value="at.03.0049.es">Banco Santander (at.03.0049.es)</option>
+					<option value="at02-0049--01">Banco Santander (at02-0049--01)</option>
+					<option value="at03-0049">Banco Santander (at03-0049)</option>
+					<option value="Bank 85SP7Q">Bank New (Bank 85SP7Q)</option>
+					<option value="at.03.bank-x.uk">Bank X (at.03.bank-x.uk)</option>
+					<option value="at02-bank-x--01">Bank X (at02-bank-x--01)</option>
+					<option value="at03-bank-x">Bank X (at03-bank-x)</option>
+					<option value="obp-bank-x-g">Bank X (obp-bank-x-g)</option>
+					<option value="obp-bank-x-r">Bank X (obp-bank-x-r)</option>
+					<option value="obp-bankx-m">Bank X (obp-bankx-m)</option>
+					<option value="obp-bankx-n">Bank X (obp-bankx-n)</option>
+					<option value="obp-bankx-q">Bank X (obp-bankx-q)</option>
+					<option value="at.03.bank-y.uk">Bank Y (at.03.bank-y.uk)</option>
+					<option value="at02-bank-y--01">Bank Y (at02-bank-y--01)</option>
+					<option value="at03-bank-y">Bank Y (at03-bank-y)</option>
+					<option value="obp-bank-y-g">Bank Y (obp-bank-y-g)</option>
+					<option value="obp-bank-y-r">Bank Y (obp-bank-y-r)</option>
+					<option value="obp-banky-m">Bank Y (obp-banky-m)</option>
+					<option value="obp-banky-n">Bank Y (obp-banky-n)</option>
+					<option value="obp-banky-q">Bank Y (obp-banky-q)</option>
+					<option value="bb.01.de">Bank of Berlin (bb.01.de)</option>
+					<option value="at.03.2038.es">Bankia (at.03.2038.es)</option>
+					<option value="at02-2038--01">Bankia (at02-2038--01)</option>
+					<option value="at03-2038">Bankia (at03-2038)</option>
+					<option value="at.03.0128.es">Bankinter (at.03.0128.es)</option>
+					<option value="at02-0128--01">Bankinter (at02-0128--01)</option>
+					<option value="at03-0128">Bankinter (at03-0128)</option>
+					<option value="at.03.2100.es">CaixaBank (at.03.2100.es)</option>
+					<option value="at02-2100--01">CaixaBank (at02-2100--01)</option>
+					<option value="at03-2100">CaixaBank (at03-2100)</option>
+					<option value="at.03.0225.es">Cetelem (at.03.0225.es)</option>
+					<option value="at02-0225--01">Cetelem (at02-0225--01)</option>
+					<option value="at03-0225">Cetelem (at03-0225)</option>
+					<option value="deutche-test">Deutche Bank Test (deutche-test)</option>
+					<option value="at.03.0019.es">Deutsche Bank (at.03.0019.es)</option>
+					<option value="at02-0019--01">Deutsche Bank (at02-0019--01)</option>
+					<option value="at03-0019">Deutsche Bank (at03-0019)</option>
+					<option value="erste-test">Erste Bank Test (erste-test)</option>
+					<option value="gh.29.fr">FR (gh.29.fr)</option>
+					<option value="op.01.fr">FR (op.01.fr)</option>
+					<option value="op.02.fr">FR (op.02.fr)</option>
+					<option value="hsbc-test">HSBC Test (hsbc-test)</option>
+					<option value="ibb">IBB (ibb)</option>
+					<option value="at.03.1465.es">ING (at.03.1465.es)</option>
+					<option value="at02-1465--01">ING (at02-1465--01)</option>
+					<option value="at03-1465">ING (at03-1465)</option>
+					<option value="at.03.2085.es">Ibercaja (at.03.2085.es)</option>
+					<option value="at02-2085--01">Ibercaja (at02-2085--01)</option>
+					<option value="at03-2085">Ibercaja (at03-2085)</option>
+					<option value="importbank0">Import Bank 0 (importbank0)</option>
+					<option value="importbank1">Import Bank 1 (importbank1)</option>
+					<option value="1001">In (1001)</option>
+					<option value="in-bank-x-1">India Bank X (in-bank-x-1)</option>
+					<option value="in-bank-x-2">India Bank X (in-bank-x-2)</option>
+					<option value="in-bank-y-1">India Bank Y (in-bank-y-1)</option>
+					<option value="in-bank-y-2">India Bank Y (in-bank-y-2)</option>
+					<option value="at.03.2095.es">Kutxabank (at.03.2095.es)</option>
+					<option value="at02-2095--01">Kutxabank (at02-2095--01)</option>
+					<option value="at03-2095">Kutxabank (at03-2095)</option>
+					<option value="gh.42.fr.lbp">LA BANQUE POSTALE (gh.42.fr.lbp)</option>
+					<option value="at.03.2048.es">Liberbank (at.03.2048.es)</option>
+					<option value="at02-2048--01">Liberbank (at02-2048--01)</option>
+					<option value="at03-2048">Liberbank (at03-2048)</option>
+					<option value="nordea">Nordea (nordea)</option>
+					<option value="nordeaab">Nordea (nordeaab)</option>
+					<option value="at.03.0073.es">Open Bank (at.03.0073.es)</option>
+					<option value="at02-0073--01">Open Bank (at02-0073--01)</option>
+					<option value="at03-0073">Open Bank (at03-0073)</option>
+					<option value="Bank of Pune">Pune (Bank of Pune)</option>
+					<option value="at.03.0081.es">Sabadell (at.03.0081.es)</option>
+					<option value="at02-0081--01">Sabadell (at02-0081--01)</option>
+					<option value="at03-0081">Sabadell (at03-0081)</option>
+					<option value="test-bank">TB (test-bank)</option>
+					<option value="testowy_bank_id">TB (testowy_bank_id)</option>
+					<option value="rbs">The Royal Bank of Scotland (rbs)</option>
+					<option value="gh.29.tr">Tr (gh.29.tr)</option>
+					<option value="op.01.tr">Tr (op.01.tr)</option>
+					<option value="op.02.tr">Tr (op.02.tr)</option>
+					<option value="gh.29.us">US (gh.29.us)</option>
+					<option value="op.01.us">US (op.01.us)</option>
+					<option value="op.02.us">US (op.02.us)</option>
+					<option value="at.03.2103.es">Unicaja (at.03.2103.es)</option>
+					<option value="at02-2103--01">Unicaja (at02-2103--01)</option>
+					<option value="at03-2103">Unicaja (at03-2103)</option>
+					<option value="au.01.aum.aum">aum (au.01.aum.aum)</option>
+					<option value="au.01.aus.aus">aus (au.01.aus.aus)</option>
+					<option value="gh.29.be">be (gh.29.be)</option>
+					<option value="op.01.be">be (op.01.be)</option>
+					<option value="op.02.be">be (op.02.be)</option>
+					<option value="chase">cb (chase)</option>
+					<option value="gh.29.de">de (gh.29.de)</option>
+					<option value="op.01.de">de (op.01.de)</option>
+					<option value="op.02.de">de (op.02.de)</option>
+					<option value="fcb">fcb (fcb)</option>
+					<option value="gh.29.fi">fi (gh.29.fi)</option>
+					<option value="op.01.fi">fi (op.01.fi)</option>
+					<option value="op.02.fi">fi (op.02.fi)</option>
+					<option value="1006">gh (1006)</option>
+					<option value="1005">ind (1005)</option>
+					<option value="inv.01.us.inv">inv (inv.01.us.inv)</option>
+					<option value="gh.29.it">it (gh.29.it)</option>
+					<option value="op.01.it">it (op.01.it)</option>
+					<option value="op.02.it">it (op.02.it)</option>
+					<option value="IVRSolution">ivr (IVRSolution)</option>
+					<option value="1003">rbi (1003)</option>
+					<option value="rxw">rxw (rxw)</option>
+					<option value="1002">sbi (1002)</option>
+					<option value="au.01.uk.uk">uk (au.01.uk.uk)</option>
+					<option value="gh.29.uk">uk (gh.29.uk)</option>
+					<option value="gh.29.uk.x">uk (gh.29.uk.x)</option>
+					<option value="gh.42.uk.uk">uk (gh.42.uk.uk)</option>
+					<option value="inv.01.uk.uk">uk (inv.01.uk.uk)</option>
+					<option value="op.01.uk">uk (op.01.uk)</option>
+					<option value="op.02.uk">uk (op.02.uk)</option>
+					<option value="somo.55.uk.uk">uk (somo.55.uk.uk)</option>
+				</select>
+				<button onclick="findATM(document.getElementById('atmBank').value)">Search</button>
+				<hr style="border: 1px solid black;" />
+				<table class="atmTable" id="atmOutput">
+					<tr>
+						<th>Name</th>
+						<th>ID</th>
+						<th>Location</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr />
+		<h2>Output</h2>
+		<div class="contain" id="output">
+			<div class="section">
+				<h3>Formatted Output</h3>
+				<div id="formattedOutput"></div>
+			</div>
+			<div class="section" style="max-width: 75%;">
+				<h3>Raw Output</h3>
+				<div id="rawOutput" class="raw"></div>
+			</div>
+		</div>
+	</body>
+	<script src="./functions/user.js"></script>
+</html>
