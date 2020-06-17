@@ -1,6 +1,8 @@
 const baseURL = 'https://apisandbox.openbankproject.com';
 const apiVersion = 'v4.0.0';
-var token;
+const raw = document.getElementById('rawOutput');
+const form = document.getElementById('formattedOutput');
+var token, r;
 
 function userlogin(username, password, key) {
 	tempURL = baseURL + '/my/logins/direct';
@@ -16,7 +18,7 @@ function userlogin(username, password, key) {
 				document.getElementById('currentUser').innerHTML += `<br><p>Session Token: ${re['token']}</p>`;
 				token = re['token'];
 				console.log('token: ' + token);
-				document.getElementById('currentUser').innerHTML += `<button onClick="getCurrentUser()">Current User</button>`;
+				// document.getElementById('currentUser').innerHTML += `<button onClick="getCurrentUser()">Current User</button>`;
 			} else {
 				document.getElementById('currentUser').innerHTML = `<br><p>Error occurred: ${this.responseText}</p>`;
 			}
@@ -40,6 +42,7 @@ function findATM(input) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var temp = JSON.parse(xhr.responseText);
+				// console.log('atm response: ' + temp);
 				var atmout = document.getElementById('atmOutput');
 				atmout.style.visibility = 'visible';
 				// console.log('response: ' + xhr.response);
@@ -76,9 +79,6 @@ function findATM(input) {
 
 function getCurrentUser() {
 	const tempURL = baseURL + '/obp/' + apiVersion + '/users/current';
-	const raw = document.getElementById('rawOutput');
-	const form = document.getElementById('formattedOutput');
-	var r;
 
 	const xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
@@ -139,6 +139,102 @@ function getCurrentUser() {
 	xhr.send();
 	xhr.onload = function () {
 		// console.log('on load' + this.response);
+	};
+}
+
+function getCards() {
+	const url = baseURL + '/obp/' + apiVersion + '/cards';
+	const xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				var temp = JSON.parse(xhr.responseText);
+				raw.innerHTML = JSON.stringify(temp.cards);
+				form.innerHTML = `
+					<table id='cardTable'>
+						<tr>
+							<th>Card Number</th>
+							<th>Account ID</th>
+							<th>Bank ID</th>
+							<th>Name on Card</th>
+							<th>Expires</th>
+						</tr>
+					</table>
+				`;
+				const ct = document.getElementById('cardTable');
+				for (var i in temp.cards) {
+					console.log(`card ${i}` + JSON.stringify(temp.cards[i]));
+					ct.innerHTML += `
+						<tr>
+							<td>${temp.cards[i]['bank_card_number']}</td>
+							<td>${temp.cards[i]['account']['id']}</td>
+							<td>${temp.cards[i]['bank_id']}</td>
+							<td>${temp.cards[i]['name_on_card']}</td>
+							<td>${temp.cards[i]['expires_date']}</td>
+						</tr>
+					`;
+				}
+			}
+		}
+	};
+
+	xhr.open('get', url, true);
+	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send();
+	xhr.onload = () => {
+		console.log('on load: ' + this.responseJSON);
+	};
+}
+
+function transactions() {
+	const bank = document.getElementById('userBank').value;
+	const account = document.getElementById('userAccount').value;
+	const url = baseURL + '/obp/' + apiVersion + '/banks/' + bank + '/accounts/' + account + '/owner/transactions';
+
+	const xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				r = JSON.parse(xhr.responseText);
+				console.log('r: ' + JSON.stringify(r.transactions));
+				raw.innerHTML = JSON.stringify(r.transactions);
+				form.innerHTML = `
+					<h3>Account: ${r.transactions[0]['this_account']['id']}</h3>
+					<table id='ttable'>
+						<tr>
+							<th>Transaction ID</th>
+							<th>Counter Account</th>
+							<th>Counter Name</th>
+							<th>Description</th>
+							<th>Amount</th>
+							<th>Currency</th>
+						</tr>
+					</table>
+				`;
+				const tt = document.getElementById('ttable');
+				for (var i in r.transactions) {
+					tt.innerHTML += `
+						<tr>
+							<td>${r.transactions[i]['id']}</td>
+							<td>${r.transactions[i]['other_account']['id']}</td>
+							<td>${r.transactions[i]['other_account']['holder']['name']}</td>
+							<td>${r.transactions[i]['details']['description']}</td>
+							<td>${r.transactions[i]['details']['value']['amount']}</td>
+							<td>${r.transactions[i]['details']['value']['currency']}</td>
+						</tr>
+					`;
+				}
+			}
+		}
+	};
+	xhr.open('get', url, true);
+	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send();
+	xhr.onload = () => {
+		// console.log(JSON.parse(this.response));
 	};
 }
 
