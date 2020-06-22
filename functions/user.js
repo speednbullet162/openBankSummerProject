@@ -2,6 +2,7 @@ const baseURL = 'https://apisandbox.openbankproject.com';
 const apiVersion = 'v4.0.0';
 const raw = document.getElementById('rawOutput');
 const form = document.getElementById('formattedOutput');
+const xhr = new XMLHttpRequest();
 var token, r;
 
 function userlogin(username, password, key) {
@@ -35,7 +36,7 @@ function userlogin(username, password, key) {
 }
 
 function findATM(input) {
-	const xhr = new XMLHttpRequest();
+	// const xhr = new XMLHttpRequest();
 	const tempURL = baseURL + '/obp/' + apiVersion + '/banks/' + input + '/atms';
 
 	xhr.onreadystatechange = function () {
@@ -80,7 +81,7 @@ function findATM(input) {
 function getCurrentUser() {
 	const tempURL = baseURL + '/obp/' + apiVersion + '/users/current';
 
-	const xhr = new XMLHttpRequest();
+	// const xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
@@ -144,7 +145,7 @@ function getCurrentUser() {
 
 function getCards() {
 	const url = baseURL + '/obp/' + apiVersion + '/cards';
-	const xhr = new XMLHttpRequest();
+	// const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = () => {
 		if (xhr.readyState == 4) {
@@ -193,7 +194,7 @@ function transactions() {
 	const account = document.getElementById('userAccount').value;
 	const url = baseURL + '/obp/' + apiVersion + '/banks/' + bank + '/accounts/' + account + '/owner/transactions';
 
-	const xhr = new XMLHttpRequest();
+	// const xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = () => {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
@@ -235,6 +236,77 @@ function transactions() {
 	xhr.send();
 	xhr.onload = () => {
 		// console.log(JSON.parse(this.response));
+	};
+}
+
+function info(bank, account) {
+	const url = baseURL + '/obp/' + apiVersion + '/my/banks/' + bank + '/accounts/' + account + '/account';
+	xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				r = JSON.parse(xhr.responseText);
+				console.log('balance: ' + r);
+				raw.innerHTML = JSON.stringify(r);
+
+				form.innerHTML = `
+					<h3>Account Information</h3>
+					<table id='infoTable'>
+						<tr>
+							<th>Number</th>
+							<th>Label</th>
+							<th>owner</th>
+							<th>Account Type</th>
+							<th>Balance</th>
+							<th>Currency</th>
+							<th>privileges</th>
+						</tr>
+						<tr>
+							<td>${r['number']}</td>
+							<td>${r['label']}</td>
+							<td>${r['owners'][0]['id']}</td>
+							<td>${r['product_code']}</td>
+							<td>${r['balance']['amount']}</td>
+							<td>${r['balance']['currency']}</td>
+							<td id='priv'></td>
+						</tr>
+					</table>
+				`;
+				for (var i in r.views_basic) {
+					document.getElementById('priv').innerHTML += r.views_basic[i]['id'];
+					if (i < r.views_basic.length - 1) {
+						document.getElementById('priv').innerHTML += ', ';
+					}
+				}
+			}
+		}
+	};
+
+	xhr.open('get', url, true);
+	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send();
+	xhr.onload = () => {
+		console.log('balance onload: ' + xhr.responseText);
+	};
+}
+
+function balance(bank) {
+	console.log('your in the balance function');
+	const url = baseURL + '/obp/' + apiVersion + '/banks/' + bank + '/accounts/private';
+	xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				console.log('you made it');
+				var temp = JSON.parse(xhr.responseText);
+			}
+		}
+	};
+
+	xhr.open('get', url, true);
+	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.onload = () => {
+		console.log(' bal onload: ' + xhr.responseText);
 	};
 }
 

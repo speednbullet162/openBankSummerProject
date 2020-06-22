@@ -171,7 +171,9 @@
 					<label class="col1">Currency</label><input type="text" id="Currency" placeholder="EUR" class="col2" />
 					<br />
 				</div>
-				<button onclick="testing(document.getElementById('userBank').value)">Account Info</button>
+				<button onClick="info(document.getElementById('userBank').value, document.getElementById('userAccount').value)">
+					Account Information
+				</button>
 			</div>
 			<div id="counterInfo" class="flexSection">
 				<h3>Counter Party Information</h3>
@@ -472,7 +474,12 @@
 				<p>Get Current User <button onClick="getCurrentUser()">Current User</button></p>
 				<p>Get User's Cards <button onClick="getCards()">User's Cards</button></p>
 				<p>Recent Transactions <button onClick="transactions()">Transactions</button></p>
-				<p>Account Balances <button onClick="balance()">Balances</button></p>
+				<p>
+					Account Balances
+					<button onClick="balance(document.getElementById('userBank').value)">
+						Balances
+					</button>
+				</p>
 			</div>
 		</div>
 		<hr />
