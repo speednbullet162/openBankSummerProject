@@ -290,14 +290,79 @@ function info(bank, account) {
 	};
 }
 
-function balance(bank) {
+// function info2(bank, account) {
+// 	const req = new XMLHttpRequest();
+// 	const url = baseURL + '/obp/' + apiVersion + '/my/banks/' + bank + '/accounts/' + account + '/account';
+// 	var bal;
+
+// 	req.open('get', url, true);
+// 	req.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+// 	req.setRequestHeader('content-type', 'application/json');
+// 	req.send();
+// 	req.onload = () => {
+// 		var rt = JSON.parse(req.responseText);
+// 		if (req.status == 400) {
+// 			bal = 'Denied';
+// 		} else {
+// 			bal = JSON.stringify(rt['balance']['amount']);
+// 		}
+// 		console.log('bal: ' + bal);
+// 	};
+// 	return JSON.stringify(bal);
+// }
+
+function accounts(bank) {
 	console.log('your in the balance function');
 	const url = baseURL + '/obp/' + apiVersion + '/banks/' + bank + '/accounts/private';
 	xhr.onreadystatechange = () => {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.log('you made it');
-				var temp = JSON.parse(xhr.responseText);
+				raw.innerHTML = '';
+				var accs = JSON.parse(xhr.responseText);
+				// console.log(JSON.stringify(accs));
+				console.log(JSON.stringify(accs.accounts));
+				// for (var i in accs['accounts']) {
+				// 	var temp = accs.accounts[i]['id'];
+				// 	console.log('temp: ' + temp);
+				// 	var tempb = info2(bank, temp);
+				// 	console.log('tempb: ' + JSON.stringify(tempb));
+				// 	raw.innerHTML += toString(tempb);
+				// }
+				raw.innerHTML += JSON.stringify(accs);
+				form.innerHTML = `
+					<table id='acTable'>
+						<tr>
+							<th>ID</th>
+							<th>Type</th>
+							<th>Privileges</th>
+							<th>Routing</th>
+						</tr>
+					</table>
+				`;
+				const ad = document.getElementById('acTable');
+				for (var i in accs.accounts) {
+					ad.innerHTML += `
+						<tr>
+							<td>${accs.accounts[i]['id']}</td>
+							<td>${accs.accounts[i]['account_type']}</td>
+							<td id='priv${i}'></td>
+							<td id='route${i}'></td>
+						</tr>
+					`;
+					for (var j in accs.accounts[i]['account_routings']) {
+						document.getElementById(`route${i}`).innerHTML += `
+							<div>
+								<strong>Scheme:</strong> ${accs.accounts[i]['account_routings'][j]['scheme']}
+								<strong>Address:</strong> ${accs.accounts[i]['account_routings'][j]['address']}
+							</div>
+						`;
+					}
+					for (var j in accs.accounts[i]['views']) {
+						document.getElementById(`priv${i}`).innerHTML += `
+							${accs.accounts[i]['views'][j]['id']}, 
+						`;
+					}
+				}
 			}
 		}
 	};
@@ -305,11 +370,116 @@ function balance(bank) {
 	xhr.open('get', url, true);
 	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
 	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send();
 	xhr.onload = () => {
-		console.log(' bal onload: ' + xhr.responseText);
+		// console.log(' bal onload: ' + xhr.responseText);
 	};
 }
 
-function testing(x) {
-	console.log('given bank: ' + x);
+function chalTypes(bank, account) {
+	const url = baseURL + '/obp/' + apiVersion + '/banks/' + bank + '/accounts/' + account + '/owner/transaction-request-types';
+	xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				r = JSON.parse(xhr.responseText);
+				console.log(r.transaction_request_types);
+				raw.innerHTML = JSON.stringify(r);
+				form.innerHTML = `
+					<table id='ctable'>
+						<tr>
+							<th>Type</th>
+							<th>Charge</th>
+							<th>Summary</th>
+						</tr>
+					</table>
+				`;
+				const ct = document.getElementById('ctable');
+				for (var i in r.transaction_request_types) {
+					ct.innerHTML += `
+						<tr>
+							<td>${r.transaction_request_types[i]['value']}</td>
+							<td>${r.transaction_request_types[i]['charge']['value']['amount']}</td>
+							<td>${r.transaction_request_types[i]['charge']['summary']}</td>
+						</tr>
+					`;
+				}
+			}
+		}
+	};
+
+	xhr.open('get', url, true);
+	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send();
+	xhr.onload = () => {
+		console.log(xhr.responseText);
+	};
+}
+
+function transfer(bank, account, currency, amount, type, cbank, caccount, des) {
+	const url =
+		baseURL +
+		'/obp/' +
+		apiVersion +
+		'/banks/' +
+		bank +
+		'/accounts/' +
+		account +
+		'/owner/transaction-request-types/' +
+		type +
+		'/transaction-requests';
+	const data = `
+		{"to": {"account_id": "${caccount}", "bank_id": "${cbank}"}, 
+		"value": {"currency": "${currency}", "amount": "${amount}"}, 
+		"description": "${des}", "challenge_type" : "${type}"}
+	`;
+
+	xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('you made it');
+				r = JSON.parse(xhr.responseText);
+				console.log(r);
+				raw.innerHTML = JSON.stringify(r);
+
+				form.innerHTML = `
+					<table id="transTable">
+						<tr>
+							<th>Status</th>
+							<th>ID</th>
+							<th>Time</th>
+							<th>Amount</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>${r['status']}</td>
+							<td>${r['id']}</td>
+							<td>${r['end_date']}</td>
+							<td>${r['details']['value']['amount']}</td>
+							<td>${r['details']['description']}</td>
+						</tr>
+					</table>
+				`;
+			}
+		}
+	};
+
+	xhr.open('post', url, true);
+	xhr.setRequestHeader('Authorization', 'DirectLogin token="' + token + '"');
+	xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send(data);
+	xhr.onload = () => {
+		// console.log(xhr.responseText);
+	};
+}
+
+function testing() {
+	console.log('in test');
+	var test = testing2();
+	console.log('after test: ' + test);
+}
+
+function testing2() {
+	console.log('in test 2');
+	return 'testing';
 }

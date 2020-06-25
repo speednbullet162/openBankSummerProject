@@ -317,7 +317,12 @@
 					</select>
 					<br />
 					<label class="col1">Account</label><input type="text" id="counterAccount" placeholder="Account ID" class="col2" />
-					<br /><label class="col1">Transfer Amount</label><input type="number" placeholder="100.00" class="col2" />
+					<br /><label class="col1">Transfer Amount</label
+					><input type="number" id="transAmount" placeholder="100.00" class="col2" /> <br />
+					<label class="col1">Challenge Type</label
+					><input type="text" id="challengeType" placeholder="SANDBOX_TAN" class="col2" /> <br /><label class="col1"
+						>Description</label
+					><input type="text" id="des" placeholder="testing" class="col2" /> <br />
 				</div>
 			</div>
 			<div class="flexSection">
@@ -475,9 +480,33 @@
 				<p>Get User's Cards <button onClick="getCards()">User's Cards</button></p>
 				<p>Recent Transactions <button onClick="transactions()">Transactions</button></p>
 				<p>
-					Account Balances
-					<button onClick="balance(document.getElementById('userBank').value)">
-						Balances
+					Accounts at Bank
+					<button onClick="accounts(document.getElementById('userBank').value)">
+						Accounts
+					</button>
+				</p>
+				<p>
+					Challenge Types
+					<button
+						onClick="chalTypes(document.getElementById('userBank').value,
+					document.getElementById('userAccount').value)"
+					>
+						Types
+					</button>
+				</p>
+				<p>
+					Transfer
+					<button
+						onClick="transfer(document.getElementById('userBank').value, 
+						document.getElementById('userAccount').value,
+						document.getElementById('Currency').value, 
+						document.getElementById('transAmount').value, 
+						document.getElementById('challengeType').value, 
+						document.getElementById('counterBank').value, 
+						document.getElementById('counterAccount').value,
+						document.getElementById('des').value)"
+					>
+						Transfer
 					</button>
 				</p>
 			</div>
